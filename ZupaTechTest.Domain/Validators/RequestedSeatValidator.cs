@@ -4,7 +4,7 @@ using ZupaTechTest.Domain;
 
 namespace ZupaTechTest.UnitTest
 {
-    public class RequestedSeatValidator
+    public class RequestedSeatValidator : IRequestedSeatValidator
     {
         public RequestedSeatValidator()
         {

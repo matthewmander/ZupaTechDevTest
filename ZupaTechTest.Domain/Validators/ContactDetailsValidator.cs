@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ZupaTechTest.Domain
 {
-    public class ContactDetailsValidator
+    public class ContactDetailsValidator : IContactDetailsValidator
     {
         public ContactDetailsValidator()
         {
