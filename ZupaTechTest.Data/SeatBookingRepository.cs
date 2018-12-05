@@ -30,5 +30,14 @@ namespace ZupaTechTest.Data
             _bookingContext.SeatBookings.Add(booking);
             _bookingContext.SaveChanges();
         }
+
+        public IEnumerable<SeatRequest> GetSeatsBySlotId(Guid slotId)
+        {
+            return _bookingContext.SeatBookings.Where(x => x.MeetingSlot.MeetingSlotId == slotId)
+                .Select(x=> new SeatRequest {
+                Email = x.Email,
+                Name = x.Name,
+                SeatNumber = x.SeatNumber});
+        }
     }
 }

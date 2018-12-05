@@ -43,13 +43,6 @@ namespace ZupaTechTest.Domain.Services
                 };
             }
 
-
-            // Check that the seats aren't booked already
-            foreach (var seatRequest in bookingRequest.SeatRequests)
-            {
-                _seatBookingRepository.IsUnique(SlotId, seatRequest.SeatNumber)
-            }
-            // Check that the name and email aren't already used
             // Check that the seat numbers are valid
             foreach (var seatRequest in bookingRequest.SeatRequests)
             {
@@ -59,7 +52,7 @@ namespace ZupaTechTest.Domain.Services
 
             return new BookingRequestResponse
             {
-                Success = false
+                Success = true
             };
         }
     }

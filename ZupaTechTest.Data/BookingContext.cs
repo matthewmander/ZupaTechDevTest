@@ -27,5 +27,6 @@ namespace ZupaTechTest.Data
         public string Name { get; set; }
         public string Email { get; set; }
         public MeetingSlot MeetingSlot { get; set; }
+        public Guid MeetingSlotId { get; set; }
     }
 }

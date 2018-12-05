@@ -2,11 +2,13 @@
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 using ZupaTechTest.Domain;
 using ZupaTechTest.Domain.Repositories;
-using ZupaTechTest.DomainServices;
+using ZupaTechTest.Domain.Services;
+using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.UnitTest.DomainServices
 {
@@ -18,18 +20,21 @@ namespace ZupaTechTest.UnitTest.DomainServices
             var mockSeatValidator = new Mock<IRequestedSeatValidator>();
             mockSeatValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
             var mockContactDetailsValidator = new Mock<IContactDetailsValidator>();
             mockContactDetailsValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
-            var mockBookingRequestRepo = new Mock<IBookingRequestRepository>();
+            var mockBookingRequestRepo = new Mock<ISeatBookingRepository>();
 
             var request = new BookingRequest();
 
-            var sut = new BookingRequestService(mockSeatValidator.Object, mockContactDetailsValidator.Object, mockBookingRequestRepo.Object);
+            var sut = new BookingRequestService(
+                mockSeatValidator.Object, 
+                mockContactDetailsValidator.Object, 
+                mockBookingRequestRepo.Object);
 
             sut.Execute(request);
 
@@ -43,12 +48,12 @@ namespace ZupaTechTest.UnitTest.DomainServices
             var mockSeatValidator = new Mock<IRequestedSeatValidator>();
             mockSeatValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(false);
+                .Returns(new ValidationResponse(false));
 
             var mockContactDetailsValidator = new Mock<IContactDetailsValidator>();
             mockContactDetailsValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
             var request = new BookingRequest();
 
@@ -56,7 +61,7 @@ namespace ZupaTechTest.UnitTest.DomainServices
 
             var result = sut.Execute(request);
 
-            result.Should().BeFalse("because validation errors were triggered");
+            result.Success.Should().BeFalse("because validation errors were triggered");
         }
 
         [Fact]
@@ -65,12 +70,12 @@ namespace ZupaTechTest.UnitTest.DomainServices
             var mockSeatValidator = new Mock<IRequestedSeatValidator>();
             mockSeatValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
             var mockContactDetailsValidator = new Mock<IContactDetailsValidator>();
             mockContactDetailsValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(false);
+                .Returns(new ValidationResponse(false));
 
             var request = new BookingRequest();
 
@@ -78,7 +83,7 @@ namespace ZupaTechTest.UnitTest.DomainServices
 
             var result = sut.Execute(request);
 
-            result.Should().BeFalse("because contact detail validation errors were triggered");
+            result.Success.Should().BeFalse("because contact detail validation errors were triggered");
         }
 
         [Fact]
@@ -87,25 +92,31 @@ namespace ZupaTechTest.UnitTest.DomainServices
             var mockSeatValidator = new Mock<IRequestedSeatValidator>();
             mockSeatValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
             var mockContactDetailsValidator = new Mock<IContactDetailsValidator>();
             mockContactDetailsValidator
                 .Setup(x => x.Validate(It.IsAny<BookingRequest>()))
-                .Returns(true);
+                .Returns(new ValidationResponse(true));
 
-            var mockBookingRequestRepo = new Mock<IBookingRequestRepository>(); 
+            var mockBookingRequestRepo = new Mock<ISeatBookingRepository>();
 
-            var request = new BookingRequest();
+            var request = new BookingRequest
+            {
+                SeatRequests = new List<SeatRequest>
+                {
+                    new SeatRequest{Email = "a", Name = "b", SeatNumber = "c"}
+                }
+            };
 
-            var sut = new BookingRequestService(mockSeatValidator.Object, 
+            var sut = new BookingRequestService(mockSeatValidator.Object,
                 mockContactDetailsValidator.Object,
                 mockBookingRequestRepo.Object);
 
             var result = sut.Execute(request);
 
-            mockBookingRequestRepo.Verify(x => x.Add(It.IsAny<BookingRequest>())
-                ,"Repository was not called to save booking");
+            mockBookingRequestRepo.Verify(x => x.Add(request.SeatRequests.ToList().First(), request.SlotId)
+                , "Repository was not called to save booking");
         }
     }
 

@@ -1,14 +1,17 @@
 using FluentAssertions;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
 using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Repositories;
 using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.UnitTest
 {
     public class ContactDetailsValidatorTest
     {
+        private Mock<ISeatBookingRepository> _mockBookingRequestRepo = new Mock<ISeatBookingRepository>();
 
         [Fact]
         public void WhenNameIsNotProvidedThenValidationFails()
@@ -23,7 +26,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -43,7 +46,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -63,7 +66,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -84,7 +87,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -105,7 +108,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -126,7 +129,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new ContactDetailsValidator();
+            var sut = new ContactDetailsValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then

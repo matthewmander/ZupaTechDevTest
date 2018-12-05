@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ZupaTechTest.DomainServices;
+using ZupaTechTest.Domain.Services;
 using ZupaTechTest.Models;
 
 namespace ZupaTechTest.Controllers

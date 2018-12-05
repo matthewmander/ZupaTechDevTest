@@ -16,4 +16,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZupaTechTest.Data\ZupaTechTest.Data.csproj" />
+    <ProjectReference Include="..\ZupaTechTest.Domain\ZupaTechTest.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

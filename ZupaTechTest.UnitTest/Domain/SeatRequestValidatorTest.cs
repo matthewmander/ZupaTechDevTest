@@ -1,14 +1,18 @@
 using FluentAssertions;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
 using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Repositories;
 using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.UnitTest
 {
     public class SeatRequestValidatorTest
     {
+        private Mock<ISeatBookingRepository> _mockBookingRequestRepo = new Mock<ISeatBookingRepository>();
+
         [Fact]
         public void WhenSeatNumberIsNotSpecifiedThenRequestIsRejected()
         {
@@ -23,7 +27,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new RequestedSeatValidator();
+            var sut = new RequestedSeatValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -44,7 +48,7 @@ namespace ZupaTechTest.UnitTest
             };
          
             //When
-            var sut = new RequestedSeatValidator();
+            var sut = new RequestedSeatValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -65,7 +69,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new RequestedSeatValidator();
+            var sut = new RequestedSeatValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then
@@ -89,7 +93,7 @@ namespace ZupaTechTest.UnitTest
             };
 
             //When
-            var sut = new RequestedSeatValidator();
+            var sut = new RequestedSeatValidator(_mockBookingRequestRepo.Object);
             var result = sut.Validate(request);
 
             //Then

@@ -6,7 +6,17 @@ namespace ZupaTechTest.Domain.Validators
 {
     public class ValidationResponse
     {
-        public bool Success { get; set; }
-        public IEnumerable<string> ValidationErrors { get; set; }
+        public ValidationResponse(bool success)
+        {
+            Success = success;
+            ValidationErrors = new List<string>();
+        }
+        public ValidationResponse(bool success, IEnumerable<string> validationErrors)
+        {
+            Success = success;
+            ValidationErrors = validationErrors;
+        }
+        public bool Success { get; private set; }
+        public IEnumerable<string> ValidationErrors { get; private set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.Domain.Services
 {
     public interface IBookingRequestService
     {
-        bool Execute(BookingRequest bookingRequest);
+        BookingRequestResponse Execute(BookingRequest bookingRequest);
     }
 }
