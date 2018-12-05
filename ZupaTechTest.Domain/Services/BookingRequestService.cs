@@ -3,7 +3,7 @@ using ZupaTechTest.Domain;
 using ZupaTechTest.Domain.Repositories;
 using ZupaTechTest.Domain.Validators;
 
-namespace ZupaTechTest.DomainServices
+namespace ZupaTechTest.Domain.Services
 {
     public class BookingRequestService : IBookingRequestService
     {
@@ -57,7 +57,10 @@ namespace ZupaTechTest.DomainServices
             }
 
 
-            return true;
+            return new BookingRequestResponse
+            {
+                Success = false
+            };
         }
     }
 }

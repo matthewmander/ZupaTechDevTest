@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.UnitTest
 {
@@ -26,7 +27,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause name is not provided");
+            result.Success.Should().BeFalse("bacause name is not provided");
         }
 
         [Fact]
@@ -46,7 +47,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause email address is not provided");
+            result.Success.Should().BeFalse("bacause email address is not provided");
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeTrue("bacause name is provided");
+            result.Success.Should().BeTrue("bacause name is provided");
         }
 
         [Fact]
@@ -87,7 +88,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause name is used multiple times in request");
+            result.Success.Should().BeFalse("bacause name is used multiple times in request");
         }
 
         [Fact]
@@ -108,7 +109,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause name is used multiple times in request");
+            result.Success.Should().BeFalse("bacause name is used multiple times in request");
         }
 
         [Fact]
@@ -129,7 +130,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeTrue("bacause names are unique");
+            result.Success.Should().BeTrue("bacause names are unique");
         }
     }
 }

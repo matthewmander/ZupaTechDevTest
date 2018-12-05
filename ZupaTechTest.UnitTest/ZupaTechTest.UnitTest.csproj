@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ZupaTechTest.DomainServices\ZupaTechTest.DomainServices.csproj" />
     <ProjectReference Include="..\ZupaTechTest.Domain\ZupaTechTest.Domain.csproj" />
   </ItemGroup>
 

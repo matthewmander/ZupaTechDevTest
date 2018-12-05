@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ZupaTechTest.Domain
+namespace ZupaTechTest.Domain.Validators
 {
     public class ContactDetailsValidator : IContactDetailsValidator
     {
@@ -9,7 +9,7 @@ namespace ZupaTechTest.Domain
         {
 
         }
-        public bool Validate(BookingRequest request)
+        public ValidationResponse Validate(BookingRequest request)
         {
             var allHaveName = request.SeatRequests.All(x => !String.IsNullOrWhiteSpace(x.Name));
             var allHaveEmail = request.SeatRequests.All(x => !String.IsNullOrWhiteSpace(x.Email));

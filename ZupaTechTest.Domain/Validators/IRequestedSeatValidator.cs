@@ -1,9 +1,10 @@
 ﻿using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Validators;
 
-namespace ZupaTechTest.UnitTest
+namespace ZupaTechTest.Domain.Validators
 {
     public interface IRequestedSeatValidator
     {
-        bool Validate(BookingRequest request);
+        ValidationResponse Validate(BookingRequest request);
     }
 }

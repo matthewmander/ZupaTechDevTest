@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ZupaTechTest.Domain.Repositories
 {
-    public interface IBookingRequestRepository
+    public interface ISeatBookingRepository
     {
-        void Add(BookingRequest bookingRequest);
+        void Add(SeatRequest seatRequest, Guid slotId);
     }
 }

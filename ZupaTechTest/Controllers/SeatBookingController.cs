@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZupaTechTest.DomainServices;
+using ZupaTechTest.Models;
 
 namespace ZupaTechTest.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class SeatBookingController : Controller
     {
+        private IBookingRequestService _bookingRequestService;
+        public SeatBookingController(IBookingRequestService bookingRequestService)
+        {
+            _bookingRequestService = bookingRequestService;
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -25,8 +32,9 @@ namespace ZupaTechTest.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]SeatBookingRequest request)
         {
+            _bookingRequestService.Execute(request.ToDomainObject());
         }
 
         // PUT api/values/5
@@ -40,5 +48,7 @@ namespace ZupaTechTest.Controllers
         public void Delete(int id)
         {
         }
+
+
     }
 }

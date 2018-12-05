@@ -1,20 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Validators;
 
-namespace ZupaTechTest.UnitTest
+namespace ZupaTechTest.Domain.Validators
 {
     public class RequestedSeatValidator : IRequestedSeatValidator
     {
-        public RequestedSeatValidator()
+        public RequestedSeatValidator( )
         {
         }
 
-        public bool Validate(BookingRequest request)
+        public ValidationResponse Validate(BookingRequest request)
         {
-            if (request.SeatRequests.Any(x => String.IsNullOrWhiteSpace(x.SeatNumber))) return false;
-            if (request.SeatRequests.Count() > 4) return false;
-            return request.SeatRequests.GroupBy(x => x.SeatNumber).Max(x => x.Count()) < 2;
+            var validationErrors = new List<string>();
+            bool validationSuceeded = true;
+            if (request.SeatRequests.Any(x => String.IsNullOrWhiteSpace(x.SeatNumber)))
+            {
+                validationSuceeded = false;
+                validationErrors.Add("All seat numbers must be stated");
+            }
+
+            if (request.SeatRequests.Count() > 4)
+            {
+                validationSuceeded = false;
+                validationErrors.Add("Only 4 seats can be booked at one time");
+            }
+
+            if (request.SeatRequests.GroupBy(x => x.SeatNumber).Max(x => x.Count()) < 2)
+            {
+                validationSuceeded = false;
+                validationErrors.Add("An attempt was made to book the same seat more than once");
+            }
+            return new ValidationResponse { Success = validationSuceeded, ValidationErrors = validationErrors };
         }
     }
 }

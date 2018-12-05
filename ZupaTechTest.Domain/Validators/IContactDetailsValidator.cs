@@ -1,7 +1,9 @@
-﻿namespace ZupaTechTest.Domain
+﻿using ZupaTechTest.Domain.Validators;
+
+namespace ZupaTechTest.Domain.Validators
 {
     public interface IContactDetailsValidator
     {
-        bool Validate(BookingRequest request);
+        ValidationResponse Validate(BookingRequest request);
     }
 }

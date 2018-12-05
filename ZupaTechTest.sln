@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZupaTechTest.UnitTest", "Zu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZupaTechTest.Domain", "ZupaTechTest.Domain\ZupaTechTest.Domain.csproj", "{C65B08CA-61B3-41E3-B310-B8B86CE3FF60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZupaTechTest.DomainServices", "ZupaTechTest.DomainServices\ZupaTechTest.DomainServices.csproj", "{6049EC9F-B6A3-4C2E-B681-FF39BDCEACAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZupaTechTest.Data", "ZupaTechTest.Data\ZupaTechTest.Data.csproj", "{A1CF027E-4662-4230-B218-95C6EA4EA1DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C65B08CA-61B3-41E3-B310-B8B86CE3FF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65B08CA-61B3-41E3-B310-B8B86CE3FF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C65B08CA-61B3-41E3-B310-B8B86CE3FF60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6049EC9F-B6A3-4C2E-B681-FF39BDCEACAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6049EC9F-B6A3-4C2E-B681-FF39BDCEACAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6049EC9F-B6A3-4C2E-B681-FF39BDCEACAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6049EC9F-B6A3-4C2E-B681-FF39BDCEACAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CF027E-4662-4230-B218-95C6EA4EA1DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CF027E-4662-4230-B218-95C6EA4EA1DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CF027E-4662-4230-B218-95C6EA4EA1DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CF027E-4662-4230-B218-95C6EA4EA1DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using ZupaTechTest.Domain;
+using ZupaTechTest.Domain.Validators;
 
 namespace ZupaTechTest.UnitTest
 {
@@ -26,7 +27,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause the seat is not specified");
+            result.Success.Should().BeFalse("bacause the seat is not specified");
         }
 
         [Fact]
@@ -47,7 +48,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause the same seat is requested multiple times in the request");
+            result.Success.Should().BeFalse("bacause the same seat is requested multiple times in the request");
         }
 
         [Fact]
@@ -68,7 +69,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeTrue("bacause unique seats are requested");
+            result.Success.Should().BeTrue("bacause unique seats are requested");
         }
 
         [Fact]
@@ -92,7 +93,7 @@ namespace ZupaTechTest.UnitTest
             var result = sut.Validate(request);
 
             //Then
-            result.Should().BeFalse("bacause too many (>4) seats are requested");
+            result.Success.Should().BeFalse("bacause too many (>4) seats are requested");
         }
 
       
