@@ -43,12 +43,10 @@ namespace ZupaTechTest.Domain.Services
                 };
             }
 
-            // Check that the seat numbers are valid
             foreach (var seatRequest in bookingRequest.SeatRequests)
             {
                 _seatBookingRepository.Add(seatRequest, bookingRequest.SlotId);
             }
-
 
             return new BookingRequestResponse
             {

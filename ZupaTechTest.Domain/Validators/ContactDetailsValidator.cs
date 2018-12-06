@@ -17,12 +17,26 @@ namespace ZupaTechTest.Domain.Validators
             var validationErrors = new List<string>();
             bool validationSuceeded = true;
 
-            var allHaveName = request.SeatRequests.All(x => !String.IsNullOrWhiteSpace(x.Name));
-            var allHaveEmail = request.SeatRequests.All(x => !String.IsNullOrWhiteSpace(x.Email));
-            var allNameAreUnique = request.SeatRequests.GroupBy(x => x.Name).Max(x => x.Count()) < 2;
-            var allEmailsAreUnique = request.SeatRequests.GroupBy(x => x.Email).Max(x => x.Count()) < 2;
-
-            validationSuceeded = allHaveName && allHaveEmail && allNameAreUnique && allEmailsAreUnique;
+            if (request.SeatRequests.Any(x => String.IsNullOrWhiteSpace(x.Name)))
+            {
+                validationSuceeded = false;
+                validationErrors.Add($"All request must have a specified name");
+            }
+            if (request.SeatRequests.Any(x => String.IsNullOrWhiteSpace(x.Email)))
+            {
+                validationSuceeded = false;
+                validationErrors.Add($"All request must have a specified email address");
+            }
+            if (request.SeatRequests.GroupBy(x => x.Name).Max(x => x.Count()) > 1)
+            {
+                validationSuceeded = false;
+                validationErrors.Add($"The same name cannot be used for multiple seats");
+            }
+            if (request.SeatRequests.GroupBy(x => x.Email).Max(x => x.Count()) > 1)
+            {
+                validationSuceeded = false;
+                validationErrors.Add($"The same email address cannot be used for multiple seats");
+            }
 
             var existingRequests = _seatBookingRepository.GetSeatsBySlotId(request.SlotId);
             foreach (var seatRequest in request.SeatRequests)
@@ -40,7 +54,7 @@ namespace ZupaTechTest.Domain.Validators
                 }
             }
 
-            return new ValidationResponse( validationSuceeded,  validationErrors );
+            return new ValidationResponse(validationSuceeded, validationErrors);
         }
     }
 }
